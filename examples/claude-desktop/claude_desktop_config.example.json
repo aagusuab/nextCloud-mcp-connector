@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "nextcloud": {
+      "command": "node",
+      "args": ["/path/to/mcp-connectors/packages/nextcloud/dist/index.js"],
+      "env": {
+        "NEXTCLOUD_URL": "https://your-nextcloud-instance.com",
+        "NEXTCLOUD_USERNAME": "your-username",
+        "NEXTCLOUD_PASSWORD": "your-app-password"
+      }
+    }
+  }
+}

@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextcloud-mcp
+  labels:
+    app: nextcloud-mcp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nextcloud-mcp
+  template:
+    metadata:
+      labels:
+        app: nextcloud-mcp
+    spec:
+      containers:
+        - name: nextcloud-mcp
+          image: nextcloud-mcp:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              name: http
+          envFrom:
+            - secretRef:
+                name: nextcloud-mcp-secrets
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5

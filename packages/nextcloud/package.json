@@ -1,0 +1,30 @@
+{
+  "name": "@mcp-connectors/nextcloud",
+  "version": "0.1.0",
+  "description": "MCP connector for Nextcloud (files, calendar, contacts)",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "nextcloud-mcp": "./dist/index.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts",
+    "dev": "tsup src/index.ts --format esm --dts --watch",
+    "start": "node dist/index.js",
+    "start:sse": "node dist/index.js --transport sse"
+  },
+  "keywords": ["mcp", "nextcloud", "webdav", "caldav", "carddav"],
+  "license": "MIT",
+  "dependencies": {
+    "@mcp-connectors/core": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "webdav": "^5.8.0"
+  }
+}
